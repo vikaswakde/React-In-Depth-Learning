@@ -1,22 +1,23 @@
-import { useEffect, useState } from "react";
+import {useState, useEffect} from 'react';
 
 const Section = () => {
-  const [elapsedSeconds, setElapsedSeconds] = useState(0);
+
+  const [visit, setVisit] = useState(0)
+
+  const visitGoUp  = () => {
+    setVisit((previsit) => previsit + 1)
+  }
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setElapsedSeconds((prevSeconds) => prevSeconds + 1);
-    }, 1000);
-
-    // prevent memeory leaks;
-    return () => clearInterval(timer);
-  }, []);
+    console.log("Section has re-reloaded")
+  })
 
   return (
     <>
-      <h2>Time on Page: {Math.floor(elapsedSeconds)} seconds(s)</h2>
+    <h2>Visits: {visit}</h2>
+    <button onClick = {visitGoUp}>+</button>
     </>
-  );
-};
+  )
+}
 
 export default Section;

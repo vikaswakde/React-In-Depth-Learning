@@ -1,16 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Section from "./Section.jsx";
 
 const Home = () => {
-  const [count, setCount] = useState(0);
+  const [timer, setTimer] = useState(0);
 
-  const handleClick = () => {
-    setCount(() => count + 1);
-  };
+  useEffect(() => {
+    console.log("Home has re-reloaded");
+  });
+
+  useEffect(() => {
+    let id = setInterval(() => {
+      setTimer((prev) => prev + 1);
+    }, 1000);
+
+    return () => clearInterval(id)
+
+  }, []);
 
   return (
     <>
-      <h1>Visits: {count}</h1>
-      <button onClick={handleClick}>+</button>
+      <h1>Time on page: {timer} second(s)</h1>
+      <Section />
     </>
   );
 };
